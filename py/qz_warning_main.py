@@ -9,7 +9,6 @@ def start():
     while True:
         device_codes = get_device_codes_updated()
         for device_code in device_codes:
-            # print(device_code)
             try:
                 running_by_device_code(device_code)
             except:

@@ -31,4 +31,5 @@ resultCli = mysqlClient(host=conf.get(_section2, 'ip'), port=conf.getint(_sectio
 pool = redis.ConnectionPool(host=conf.get(_section3, 'ip'), port=conf.get(_section3, 'port'),
                             password=conf.get(_section3, 'pw'),
                             decode_responses=True)
+
 redisCli = redis.Redis(connection_pool=pool)
