@@ -9,6 +9,7 @@ warnings.filterwarnings('ignore')
 
 
 def running_by_device_code(device_code):
+    print(device_code)
     source_table = 'qz_device_data'
     result_table = 'qz_monitor_warning'
 
@@ -32,6 +33,7 @@ def running_by_device_code(device_code):
 
 
 def running_by_risk_zone_num(risk_zone_num):
+    print(risk_zone_num)
     result_table = 'qz_risk_zone_warning'
     model_ = switch_model(risk_zone_num)
     if model_ is None:
