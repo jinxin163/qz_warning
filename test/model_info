@@ -1,0 +1,31 @@
+GNSS_01
+{"red": {"XY_1h": 50, "Z_1h": 50}, "orange": {"XY_1h": 1000, "Z_1h": 1000}, "yellow": {"XY_1h": 1000, "Z_1h": 1000}}
+{"XY_1h": "前1小时水平位移变形量", "Z_1h": "前1小时垂直位移变形量", "unit": "mm"}
+
+DBLF_01
+{"red": {"DBLF01_1h": 30}, "orange": {"DBLF01_1h": 1000}, "yellow": {"DBLF01_1h": 1000}, "blue": {"DBLF01_1h": 1000}}
+{"DBLF01_1h": "前1小时地表裂缝变形量", "unit": "mm"}
+
+BMQX_01
+{"red": {"BMQX01_1h": 2, "BMQX02_1h": 2, "BMQX03_1h": 2}, "orange": {"BMQX01_1h": 1000, "BMQX02_1h": 1000, "BMQX03_1h": 1000}, "yellow": {"BMQX01_1h": 1000, "BMQX02_1h": 1000, "BMQX03_1h": 1000}}
+{"BMQX01_1h": "前1小时表面倾斜X轴变化量", "BMQX02_1h": "前1小时表面倾斜Y轴变化量", "BMQX03_1h": "前1小时表面倾斜Z轴变化量", "unit": "度"}
+
+SWGD_01
+{"red": {"SWGD01_1h": 1}, "orange": {"SWGD01_1h": 1000}, "yellow": {"SWGD01_1h": 1000}}
+{"SWGD01_1h": "前1小时泥水位变化量", "unit": "m"}
+
+JSJC_01
+{"red": {"JSJC01_1h": 500}, "orange": {"JSJC01_1h": 1000}, "yellow": {"JSJC01_1h": 1000}}
+{"JSJC01_1h": "前1小时降水量", "unit": "mm"}
+
+BTJC_01
+{"red": {"BTJC01": 900, "BTJC02": 900, "BTJC03": 900}, "orange": {"BTJC01": 10000, "BTJC02": 10000, "BTJC03": 10000}, "yellow": {"BTJC01": 10000, "BTJC02": 10000, "BTJC03": 10000}}
+{"BTJC01": "X方向加速度", "BTJC02": "Y方向加速度", "BTJC03": "Z方向加速度", "unit": "mg"}
+
+THSL_01
+{"red": {"THSL01": 90}, "orange": {"THSL01": 1000}, "yellow": {"THSL01": 1000}}
+{"THSL01": "土含水率实时监测值", "unit": "百分数"}
+
+SBQX_01
+{"red": {"SBQX01_1h": 1000, "SBQX02_1h": 1000, "SBQX03_1h": 1000}, "orange": {"SBQX01_1h": 1000, "SBQX02_1h": 1000, "SBQX03_1h": 1000}, "yellow": {"SBQX01_1h": 1000, "SBQX02_1h": 1000, "SBQX03_1h": 1000}}
+{"SBQX01_1h": "前1小时深部倾斜X方向位移", "SBQX02_1h": "前1小时深部倾斜Y方向位移", "SBQX03_1h": "前1小时深部倾斜Z方向位移", "unit": "mm"}
