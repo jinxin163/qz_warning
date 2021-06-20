@@ -1,9 +1,7 @@
 # -*- coding:utf-8 -*-
 import configparser
 import os
-
 import redis
-
 from dbClient import mysqlClient
 
 __projectName = 'qz_warning'
