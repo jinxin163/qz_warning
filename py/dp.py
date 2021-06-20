@@ -81,8 +81,8 @@ def generate_result_monitor_warning(code, indicators_dict, monitor_time):
     monitor_type_id = dic.get('monitor_type_id')
     warning_rule = extra_param_info.get(gz_key_triggered)
 
-    # if warning_level == 0:
-    #     return None
+    if warning_level == 0:
+        return None
 
     result_df = pd.DataFrame(data={"station_code": station_code,
                                    "station_name": station_name,
@@ -127,8 +127,8 @@ def generate_result_zone_warning(risk_zone_num, indicators_dict, monitor_time):
     risk_zone_name = df1.values[0]
     warning_rule = extra_param_info.get(gz_key_triggered)
 
-    # if warning_level == 0:
-    #     return None
+    if warning_level == 0:
+        return None
 
     result_df = pd.DataFrame(data={'model_code': model_code,
                                    'model_name': model_name,
