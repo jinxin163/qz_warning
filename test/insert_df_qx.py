@@ -3,7 +3,7 @@ import pandas as pd
 import time
 from config import resultCli
 
-df = pd.read_csv(r"C:\Users\X1\Desktop\qzdata\skmyl.csv", sep='\t', header=None)
+df = pd.read_csv(r"skmyl.csv", sep='\t', header=None)
 
 df1 = resultCli.query_params(table='sqxj_hj_biz_067_qx_skmyl_valid_old', items=["*"])
 print(df1)
