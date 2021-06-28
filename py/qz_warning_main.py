@@ -29,15 +29,16 @@ def start():
             logger.exception(msg='')
 
         # -----------------------------------------------------------------------------
-        try:
-            risk_zone_nums = get_risk_zone_nums_updated_forecast()
-            for zone_num in risk_zone_nums:
-                try:
-                    running_risk_zone_forecast(zone_num)
-                except:
-                    logger.exception(msg=zone_num)
-        except:
-            logger.exception(msg='')
+        # try:
+        #     risk_zone_nums = get_risk_zone_nums_updated_forecast()
+        #     for zone_num in risk_zone_nums:
+        #         try:
+        #             running_risk_zone_forecast(zone_num)
+        #         except:
+        #             logger.exception(msg=zone_num)
+        # except:
+        #     logger.exception(msg='')
+
         time.sleep(10)
 
 

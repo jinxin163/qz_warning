@@ -158,7 +158,7 @@ def get_data_qx(risk_zone_num):
     return df
 
 
-def get_data_qx_forecast(risk_zone_num):
+def get_data_qx_report(risk_zone_num):
     district_name = sourceCli.query_params(table='qz_risk_zone',
                                            items=["district_name"],
                                            where={"risk_zone_num": risk_zone_num}, dt='list')
@@ -170,7 +170,7 @@ def get_data_qx_forecast(risk_zone_num):
                                 sort="DESC",
                                 limit=1,
                                 distinct=True)
+
     df.index = pd.DatetimeIndex(df['reporttimes'].tolist())
     df.drop(columns=['reporttimes'], inplace=True)
-    df.columns = ['QXJY_00_12', 'QXJY_12_24']
     return df

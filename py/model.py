@@ -93,6 +93,8 @@ def THSL(device_code):
     indicators = df.iloc[-1].to_dict()
     result_df = generate_result_monitor_warning(device_code, indicators, df.index[-1])
     return result_df
+
+
 # -------------------------------------------
 
 
@@ -106,19 +108,19 @@ def QXJY(risk_zone_num):
     return result_df
 
 
-def QXJY_forecast(risk_zone_num):
+def QXJY_report(risk_zone_num):
     df1 = get_data_qx(risk_zone_num)
     if df1.empty:
         print('df.empty')
         return None
-    df2 = get_data_qx_forecast(risk_zone_num)
+    df2 = get_data_qx_report(risk_zone_num)
     if df1.empty:
         print('df.empty')
         return None
 
-    indicators_past12 = calc_sum_time_range(df1, '12h')
+    indicators = calc_QXJY_report_12_24h(df1, df2)
 
-    result_df = generate_result_zone_warning(risk_zone_num, indicators, df.index[-1])
+    result_df = generate_result_zone_warning(risk_zone_num, indicators, df1.index[-1])
     return result_df
 
 
@@ -133,7 +135,7 @@ def switch_model(code):
         model_code = model_code.split('-')
         model_code = model_code[0]
         if model_code_ori.find('forecast') != -1:
-            model_ = eval(model_code+'_forecast')
+            model_ = eval(model_code + '_forecast')
         else:
             model_ = eval(model_code)
     except:
