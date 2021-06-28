@@ -49,3 +49,23 @@ def calc_diff_time_range(df, time_range):
     df.columns = [col + '_' + time_range for col in df.columns]
     dic = df.to_dict('records')[0]
     return dic
+
+
+def calc_QXJY_forecast_12_24h(df1, df2):
+    df1 = df1.resample('1h').last().ffill()
+
+    time_range = '12h'
+    start_time = df1.index[-1] - deltaTime(time_range)
+    df1 = df1[df1.index > start_time]
+    df1.columns = [f'{i}_{time_range}' for i in df1.columns]
+    dic = df1.sum().to_dict()
+    QXJY_PAST_12 = dic.get('QXJY_12h')
+
+    QXJY_00_12 = df2['QXJY_00_12']
+    QXJY_12_24 = df2['QXJY_12_24']
+
+    QXJY_YB_12h = QXJY_PAST_12 + QXJY_00_12
+    QXJY_YB_24h = QXJY_00_12 + QXJY_12_24
+
+    dic1 = {'QXJY_YB_12h': QXJY_YB_12h, 'QXJY_YB_24h': QXJY_YB_24h, }
+    return dic1

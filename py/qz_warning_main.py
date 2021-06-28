@@ -7,21 +7,37 @@ from process import *
 
 def start():
     while True:
-        device_codes = get_device_codes_updated()
-        for device_code in device_codes:
-            try:
-                running_by_device_code(device_code)
-            except:
-                logger.exception(msg=device_code)
+        try:
+            device_codes = get_device_codes_updated()
+            for device_code in device_codes:
+                try:
+                    running_monitor_warning(device_code)
+                except:
+                    logger.exception(msg=device_code)
+        except:
+            logger.exception(msg='')
 
         # -----------------------------------------------------------------------------
-        risk_zone_nums = get_risk_zone_nums_updated()
-        for zone_num in risk_zone_nums:
-            try:
-                running_by_risk_zone_num(zone_num)
-            except:
-                logger.exception(msg=zone_num)
+        try:
+            risk_zone_nums = get_risk_zone_nums_updated()
+            for zone_num in risk_zone_nums:
+                try:
+                    running_risk_zone_warning(zone_num)
+                except:
+                    logger.exception(msg=zone_num)
+        except:
+            logger.exception(msg='')
 
+        # -----------------------------------------------------------------------------
+        try:
+            risk_zone_nums = get_risk_zone_nums_updated_forecast()
+            for zone_num in risk_zone_nums:
+                try:
+                    running_risk_zone_forecast(zone_num)
+                except:
+                    logger.exception(msg=zone_num)
+        except:
+            logger.exception(msg='')
         time.sleep(10)
 
 

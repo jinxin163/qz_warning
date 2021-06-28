@@ -91,6 +91,40 @@ def get_risk_zone_nums_updated():
     return risk_zone_nums
 
 
+def get_risk_zone_nums_updated_forecast():
+    table = 'sqxj_hj_biz_067_qx_24xsljmyl_valid_old_copy'
+    old_id = get_latest_id(table)
+    if old_id is None:
+        lasted_id = sourceCli.query_params(table,
+                                           items=['id'],
+                                           order_by='id',
+                                           sort='DESC',
+                                           limit=1,
+                                           dt='list')[0]
+        save_latest_id(table, lasted_id)
+        return []
+
+    df = sourceCli.query_params(table,
+                                items=['id', 'county'],
+                                where={'id': [old_id, None]})
+
+    id_list = df['id'].to_list()
+    if len(id_list) > 0:
+        lasted_id = max(id_list)
+        save_latest_id(table, lasted_id)
+
+    counties = df['county'].drop_duplicates().to_list()
+    risk_zone_nums = []
+    for county in counties:
+        zone_nums = sourceCli.query_params('qz_risk_zone',
+                                           items=['risk_zone_num'],
+                                           where={'district_name': "%" + str(county)[0:2] + "%"},
+                                           dt="list")
+        for num in zone_nums:
+            risk_zone_nums.append(num)
+    return risk_zone_nums
+
+
 def get_data_device(device_code, time_range):
     lt = get_latest_time(device_code)
     lt = datetime.datetime.strptime(list(lt.values())[0], "%Y-%m-%d %H:%M:%S")
@@ -108,17 +142,35 @@ def get_data_device(device_code, time_range):
 
 def get_data_qx(risk_zone_num):
     district_name = sourceCli.query_params(table='qz_risk_zone',
-                                 items=["district_name"],
-                                 where={"risk_zone_num": risk_zone_num}, dt='list')
+                                           items=["district_name"],
+                                           where={"risk_zone_num": risk_zone_num}, dt='list')
     district_name = district_name[0][0:2]
     df = sourceCli.query_params(table='sqxj_hj_biz_067_qx_skmyl_valid_old',
                                 items=['observtimes', 'value'],
                                 where={'county': "%" + district_name + "%"},
                                 order_by="observtimes",
                                 sort="DESC",
-                                limit=10,
+                                limit=30,
                                 distinct=True)
     df.index = pd.DatetimeIndex(df['observtimes'].tolist())
     df.drop(columns=['observtimes'], inplace=True)
     df.columns = ['QXJY']
+    return df
+
+
+def get_data_qx_forecast(risk_zone_num):
+    district_name = sourceCli.query_params(table='qz_risk_zone',
+                                           items=["district_name"],
+                                           where={"risk_zone_num": risk_zone_num}, dt='list')
+    district_name = district_name[0][0:2]
+    df = sourceCli.query_params(table='sqxj_hj_biz_067_qx_24xsljmyl_valid_old',
+                                items=['reporttimes', 'value_00_12', 'value_12_24'],
+                                where={'county': "%" + district_name + "%"},
+                                order_by="reporttimes",
+                                sort="DESC",
+                                limit=1,
+                                distinct=True)
+    df.index = pd.DatetimeIndex(df['reporttimes'].tolist())
+    df.drop(columns=['reporttimes'], inplace=True)
+    df.columns = ['QXJY_00_12', 'QXJY_12_24']
     return df

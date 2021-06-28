@@ -101,7 +101,23 @@ def QXJY(risk_zone_num):
     if df.empty:
         print('df.empty')
         return None
-    indicators = calc_sum_time_range(df, '6h')
+    indicators = calc_sum_time_range(df, '24h')
+    result_df = generate_result_zone_warning(risk_zone_num, indicators, df.index[-1])
+    return result_df
+
+
+def QXJY_forecast(risk_zone_num):
+    df1 = get_data_qx(risk_zone_num)
+    if df1.empty:
+        print('df.empty')
+        return None
+    df2 = get_data_qx_forecast(risk_zone_num)
+    if df1.empty:
+        print('df.empty')
+        return None
+
+    indicators_past12 = calc_sum_time_range(df1, '12h')
+
     result_df = generate_result_zone_warning(risk_zone_num, indicators, df.index[-1])
     return result_df
 
@@ -111,12 +127,15 @@ def switch_model(code):
                                 items=['model_code'],
                                 where={'obj_id': code})
     try:
-        model_code = df['model_code'][0]
-        model_code = model_code.split('_')
+        model_code_ori = str(df['model_code'][0])
+        model_code = model_code_ori.split('_')
         model_code = model_code[0]
         model_code = model_code.split('-')
         model_code = model_code[0]
-        model_ = eval(model_code)
+        if model_code_ori.find('forecast') != -1:
+            model_ = eval(model_code+'_forecast')
+        else:
+            model_ = eval(model_code)
     except:
         return None
     return model_
