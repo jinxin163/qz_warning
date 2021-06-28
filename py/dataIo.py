@@ -58,7 +58,7 @@ def get_device_codes_updated():
 
 
 def get_risk_zone_nums_updated():
-    table = 'sqxj_hj_biz_067_qx_skmyl_valid_old'
+    table = 'qz_risk_zone_rain'
     old_id = get_latest_id(table)
     if old_id is None:
         lasted_id = sourceCli.query_params(table,
@@ -92,7 +92,7 @@ def get_risk_zone_nums_updated():
 
 
 def get_risk_zone_nums_updated_forecast():
-    table = 'sqxj_hj_biz_067_qx_24xsljmyl_valid_old_copy'
+    table = 'qz_risk_zone_rain_report'
     old_id = get_latest_id(table)
     if old_id is None:
         lasted_id = sourceCli.query_params(table,
@@ -145,7 +145,7 @@ def get_data_qx(risk_zone_num):
                                            items=["district_name"],
                                            where={"risk_zone_num": risk_zone_num}, dt='list')
     district_name = district_name[0][0:2]
-    df = sourceCli.query_params(table='sqxj_hj_biz_067_qx_skmyl_valid_old',
+    df = sourceCli.query_params(table='qz_risk_zone_rain',
                                 items=['observtimes', 'value'],
                                 where={'county': "%" + district_name + "%"},
                                 order_by="observtimes",
@@ -163,7 +163,7 @@ def get_data_qx_report(risk_zone_num):
                                            items=["district_name"],
                                            where={"risk_zone_num": risk_zone_num}, dt='list')
     district_name = district_name[0][0:2]
-    df = sourceCli.query_params(table='sqxj_hj_biz_067_qx_24xsljmyl_valid_old',
+    df = sourceCli.query_params(table='qz_risk_zone_rain_report',
                                 items=['reporttimes', 'value_00_12', 'value_12_24'],
                                 where={'county': "%" + district_name + "%"},
                                 order_by="reporttimes",
