@@ -44,6 +44,7 @@ def running_risk_zone_warning(risk_zone_num):
 
     if result_df is not None:
         print(result_df)
+        print(result_df['monitor_value'])
         resultCli.insert_df(result_table, result_df)
 
     for x in locals().keys():

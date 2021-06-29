@@ -11,13 +11,13 @@ rootPath = __curPath[:__curPath.find(__projectName) + len(__projectName)]
 conf = configparser.ConfigParser()
 conf.read(rootPath + r'/conf/conf.ini', encoding='utf-8')
 
-_section1 = 'mysql_conn_zwy'
-_section2 = 'mysql_conn_zwy'
-_section3 = 'redis_conn_zwy'
+# _section1 = 'mysql_conn_zwy'
+# _section2 = 'mysql_conn_zwy'
+# _section3 = 'redis_conn_zwy'
 
-# _section1 = 'source_conn'
-# _section2 = 'result_conn'
-# _section3 = 'redis_conn'
+_section1 = 'source_conn'
+_section2 = 'result_conn'
+_section3 = 'redis_conn'
 
 sourceCli = mysqlClient(host=conf.get(_section1, 'ip'), port=conf.getint(_section1, 'port'),
                         user=conf.get(_section1, 'user'), password=conf.get(_section1, 'pw'),

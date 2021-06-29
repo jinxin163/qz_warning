@@ -6,7 +6,7 @@ from config import resultCli
 df = pd.read_csv(r"skmyl.csv", sep='\t', header=None)
 print(df)
 
-df1 = resultCli.query_params(table='sqxj_hj_biz_067_qx_skmyl_valid_old', items=["*"])
+df1 = resultCli.query_params(table='sqxj_hj_biz_067_qx_skmyl_valid_old111', items=["*"])
 print(df1)
 cols = list(df1.columns)
 cols.remove("id")
@@ -22,5 +22,5 @@ for code in code_list:
     dfi = dfi.reset_index(drop=True)
     dfi = dfi.head(1)
     print(dfi)
-    resultCli.insert_df(table='sqxj_hj_biz_067_qx_skmyl_valid_old', df=dfi)
+    resultCli.insert_df(table='qz_risk_zone_rain', df=dfi)
     time.sleep(5)

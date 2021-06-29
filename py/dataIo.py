@@ -149,7 +149,6 @@ def get_data_qx(risk_zone_num):
                                 items=['observtimes', 'value'],
                                 where={'county': "%" + district_name + "%"},
                                 order_by="observtimes",
-                                sort="DESC",
                                 limit=30,
                                 distinct=True)
     df.index = pd.DatetimeIndex(df['observtimes'].tolist())
@@ -167,8 +166,7 @@ def get_data_qx_report(risk_zone_num):
                                 items=['reporttimes', 'value_00_12', 'value_12_24'],
                                 where={'county': "%" + district_name + "%"},
                                 order_by="reporttimes",
-                                sort="DESC",
-                                limit=1,
+                                limit=30,
                                 distinct=True)
 
     df.index = pd.DatetimeIndex(df['reporttimes'].tolist())
