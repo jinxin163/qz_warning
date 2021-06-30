@@ -54,7 +54,7 @@ def match_warning_level(indicators_dict, threshold_dict):
     return warning_value, threshold_value, warning_level, gz_key_triggered
 
 
-def generate_result_monitor_warning(code, indicators_dict, monitor_time):
+def generate_result_monitor_warning(code, indicators_dict):
     df = sourceCli.query_params(table='qz_warning_model_use_info',
                                 items=['model_code', 'model_name', 'param_info', 'extra_param_info'],
                                 where={"obj_id": code})
@@ -97,7 +97,7 @@ def generate_result_monitor_warning(code, indicators_dict, monitor_time):
                                    "monitor_value": warning_value,
                                    "warning_level": warning_level,
                                    "warning_rule": warning_rule,
-                                   "warning_time": monitor_time,
+                                   "warning_time": str(datetime.datetime.now())[:19],
                                    "version": 1,
                                    "remark": '',
                                    "create_time": str(datetime.datetime.now())[:19],
@@ -107,7 +107,7 @@ def generate_result_monitor_warning(code, indicators_dict, monitor_time):
     return result_df
 
 
-def generate_result_zone_warning(risk_zone_num, indicators_dict, monitor_time):
+def generate_result_zone_warning(risk_zone_num, indicators_dict):
     df = sourceCli.query_params(table='qz_warning_model_use_info',
                                 items=['model_code', 'model_name', 'param_info', 'extra_param_info'],
                                 where={"obj_id": risk_zone_num, "model_type": 2})
@@ -138,7 +138,7 @@ def generate_result_zone_warning(risk_zone_num, indicators_dict, monitor_time):
                                    'monitor_value': warning_value,
                                    'warning_rule': warning_rule,
                                    'warning_level': warning_level,
-                                   'warning_time': monitor_time,
+                                   'warning_time': str(datetime.datetime.now())[:19],
                                    "version": 1,
                                    "remark": '',
                                    "create_time": str(datetime.datetime.now())[:19],
@@ -147,7 +147,7 @@ def generate_result_zone_warning(risk_zone_num, indicators_dict, monitor_time):
     return result_df
 
 
-def generate_result_zone_warning_report(risk_zone_num, indicators_dict, monitor_time):
+def generate_result_zone_warning_report(risk_zone_num, indicators_dict):
     df = sourceCli.query_params(table='qz_warning_model_use_info',
                                 items=['model_code', 'model_name', 'param_info', 'extra_param_info'],
                                 where={"obj_id": risk_zone_num, "model_type": 3})
@@ -181,7 +181,7 @@ def generate_result_zone_warning_report(risk_zone_num, indicators_dict, monitor_
                                    'monitor_value': warning_value,
                                    'warning_level': warning_level,
                                    'warning_rule': warning_rule,
-                                   'warning_time': monitor_time,
+                                   'warning_time': str(datetime.datetime.now())[:19],
                                    'forecast_time_type': forecast_time_type,
                                    "version": 1,
                                    "remark": '',

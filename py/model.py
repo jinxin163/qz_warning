@@ -11,7 +11,7 @@ def GNSS(device_code):
         print('df.empty')
         return None
     indicators = calc_GNSS_S_past_time(df, '1h')
-    result_df = generate_result_monitor_warning(device_code, indicators, df.index[-1])
+    result_df = generate_result_monitor_warning(device_code, indicators)
     return result_df
 
 
@@ -21,7 +21,7 @@ def BMQX(device_code):
         print('df.empty')
         return None
     indicators = calc_diff_time_range(df, '1h')
-    result_df = generate_result_monitor_warning(device_code, indicators, df.index[-1])
+    result_df = generate_result_monitor_warning(device_code, indicators)
     return result_df
 
 
@@ -31,7 +31,7 @@ def DBLF(device_code):
         print('df.empty')
         return None
     indicators = calc_diff_time_range(df, '1h')
-    result_df = generate_result_monitor_warning(device_code, indicators, df.index[-1])
+    result_df = generate_result_monitor_warning(device_code, indicators)
     return result_df
 
 
@@ -41,7 +41,7 @@ def SWGD(device_code):
         print('df.empty')
         return None
     indicators = calc_diff_time_range(df, '1h')
-    result_df = generate_result_monitor_warning(device_code, indicators, df.index[-1])
+    result_df = generate_result_monitor_warning(device_code, indicators)
     return result_df
 
 
@@ -52,7 +52,7 @@ def SBQX(device_code):
         print('df.empty')
         return None
     indicators = calc_diff_time_range(df, '1h')
-    result_df = generate_result_monitor_warning(device_code, indicators, df.index[-1])
+    result_df = generate_result_monitor_warning(device_code, indicators)
     return result_df
 
 
@@ -62,7 +62,7 @@ def JSJC(device_code):
         print('df.empty')
         return None
     indicators = df.iloc[-1].to_dict()
-    result_df = generate_result_monitor_warning(device_code, indicators, df.index[-1])
+    result_df = generate_result_monitor_warning(device_code, indicators)
     return result_df
 
 
@@ -72,7 +72,7 @@ def BTJC(device_code):
         print('df.empty')
         return None
     indicators = df.iloc[-1].to_dict()
-    result_df = generate_result_monitor_warning(device_code, indicators, df.index[-1])
+    result_df = generate_result_monitor_warning(device_code, indicators)
     return result_df
 
 
@@ -82,7 +82,7 @@ def DXSW(device_code):
         print('df.empty')
         return None
     indicators = df.iloc[-1].to_dict()
-    result_df = generate_result_monitor_warning(device_code, indicators, df.index[-1])
+    result_df = generate_result_monitor_warning(device_code, indicators)
     return result_df
 
 
@@ -92,7 +92,7 @@ def THSL(device_code):
         print('df.empty')
         return None
     indicators = df.iloc[-1].to_dict()
-    result_df = generate_result_monitor_warning(device_code, indicators, df.index[-1])
+    result_df = generate_result_monitor_warning(device_code, indicators)
     return result_df
 
 
@@ -105,7 +105,7 @@ def QXJY(risk_zone_num):
         print('df.empty')
         return None
     indicators = calc_sum_time_range(df, '24h')
-    result_df = generate_result_zone_warning(risk_zone_num, indicators, df.index[-1])
+    result_df = generate_result_zone_warning(risk_zone_num, indicators)
     return result_df
 
 
@@ -121,7 +121,7 @@ def QXJY_report(risk_zone_num):
 
     indicators = calc_QXJY_report_12_24h(df1, df2)
 
-    result_df = generate_result_zone_warning_report(risk_zone_num, indicators, df2.index[-1])
+    result_df = generate_result_zone_warning_report(risk_zone_num, indicators)
     return result_df
 
 
