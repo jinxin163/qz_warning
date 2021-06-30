@@ -44,7 +44,6 @@ def running_risk_zone_warning(risk_zone_num):
 
     if result_df is not None:
         print(result_df)
-        print(result_df['monitor_value'])
         resultCli.insert_df(result_table, result_df)
 
     for x in locals().keys():
@@ -52,10 +51,10 @@ def running_risk_zone_warning(risk_zone_num):
     gc.collect()
 
 
-def running_risk_zone_forecast(risk_zone_num):
-    print(risk_zone_num)
+def running_risk_zone_report(risk_zone_num):
+    print('report ' + risk_zone_num)
     result_table = 'qz_warning_forecast'
-    model_ = switch_model(risk_zone_num+'_forecast')
+    model_ = switch_model(risk_zone_num, type='report')
     if model_ is None:
         print('model is None')
         return

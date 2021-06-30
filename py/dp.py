@@ -81,8 +81,8 @@ def generate_result_monitor_warning(code, indicators_dict, monitor_time):
     monitor_type_id = dic.get('monitor_type_id')
     warning_rule = extra_param_info.get(gz_key_triggered)
 
-    if warning_level == 0:
-        return None
+    # if warning_level == 0:
+    #     return None
 
     result_df = pd.DataFrame(data={"station_code": station_code,
                                    "station_name": station_name,
@@ -110,16 +110,16 @@ def generate_result_monitor_warning(code, indicators_dict, monitor_time):
 def generate_result_zone_warning(risk_zone_num, indicators_dict, monitor_time):
     df = sourceCli.query_params(table='qz_warning_model_use_info',
                                 items=['model_code', 'model_name', 'param_info', 'extra_param_info'],
-                                where={"obj_id": risk_zone_num})
+                                where={"obj_id": risk_zone_num, "model_type": 2})
     info_dic = df.to_dict(orient='index')
     info_dic = info_dic.get(0)
     model_code = info_dic.get('model_code')
     model_name = info_dic.get('model_name')
-    threshold = eval(info_dic.get('param_info'))
+    threshold_dict = eval(info_dic.get('param_info'))
     extra_param_info = eval(info_dic.get('extra_param_info'))
 
     warning_value, threshold_value, warning_level, gz_key_triggered = \
-        match_warning_level(indicators_dict, threshold)
+        match_warning_level(indicators_dict, threshold_dict)
 
     df1 = sourceCli.query_params(table="qz_risk_zone",
                                  items=["risk_zone_name"],
@@ -127,8 +127,8 @@ def generate_result_zone_warning(risk_zone_num, indicators_dict, monitor_time):
     risk_zone_name = df1.values[0]
     warning_rule = extra_param_info.get(gz_key_triggered)
 
-    if warning_level == 0:
-        return None
+    # if warning_level == 0:
+    #     return None
 
     result_df = pd.DataFrame(data={'model_code': model_code,
                                    'model_name': model_name,
@@ -150,39 +150,33 @@ def generate_result_zone_warning(risk_zone_num, indicators_dict, monitor_time):
 def generate_result_zone_warning_report(risk_zone_num, indicators_dict, monitor_time):
     df = sourceCli.query_params(table='qz_warning_model_use_info',
                                 items=['model_code', 'model_name', 'param_info', 'extra_param_info'],
-                                where={"obj_id": risk_zone_num})
+                                where={"obj_id": risk_zone_num, "model_type": 3})
     info_dic = df.to_dict(orient='index')
     info_dic = info_dic.get(0)
     model_code = info_dic.get('model_code')
     model_name = info_dic.get('model_name')
-    threshold = eval(info_dic.get('param_info'))
+    threshold_dict = eval(info_dic.get('param_info'))
     extra_param_info = eval(info_dic.get('extra_param_info'))
-    threshold_new = {"red": {"QXJY_YB_12h": list(threshold.get('red').values())[0],
-                             "QXJY_YB_24h": list(threshold.get('red').values())[0]},
-                     "orange": {"QXJY_YB_12h": list(threshold.get('orange').values())[0],
-                                "QXJY_YB_24h": list(threshold.get('orange').values())[0]},
-                     "yellow": {"QXJY_YB_12h": list(threshold.get('yellow').values())[0],
-                                "QXJY_YB_24h": list(threshold.get('yellow').values())[0]}}
 
     warning_value, threshold_value, warning_level, gz_key_triggered = \
-        match_warning_level(indicators_dict, threshold_new)
+        match_warning_level(indicators_dict, threshold_dict)
 
     df1 = sourceCli.query_params(table="qz_risk_zone",
                                  items=["risk_zone_name"],
                                  where={"risk_zone_num": risk_zone_num})
     risk_zone_name = df1.values[0]
     warning_rule = extra_param_info.get(gz_key_triggered)
-    map1 = {'QXJY_YB_12h': 1, 'QXJY_YB_24h': 2}
+    map1 = {'QXJY_YB_12h': 12, 'QXJY_YB_24h': 24}
     forecast_time_type = map1.get(gz_key_triggered)
 
-    if warning_level == 0:
-        return None
+    # if warning_level == 0:
+    #     return None
 
     result_df = pd.DataFrame(data={'risk_zone_num': risk_zone_num,
                                    'risk_zone_name': risk_zone_name,
                                    'model_code': model_code,
                                    'model_name': model_name,
-                                   'model_type': 1,
+                                   'model_type': 3,
                                    'threshold_value': threshold_value,
                                    'monitor_value': warning_value,
                                    'warning_level': warning_level,

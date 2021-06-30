@@ -61,8 +61,8 @@ def calc_QXJY_report_12_24h(df1, df2):
     dic = df1.sum().to_dict()
     QXJY_PAST_12 = dic.get('QXJY_12h')
 
-    QXJY_00_12 = df2['value_00_12']
-    QXJY_12_24 = df2['value_12_24']
+    QXJY_00_12 = df2['value_00_12'].values[0]
+    QXJY_12_24 = df2['value_12_24'].values[0]
 
     QXJY_YB_12h = QXJY_PAST_12 + QXJY_00_12
     QXJY_YB_24h = QXJY_00_12 + QXJY_12_24

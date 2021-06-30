@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from dataIo import *
-from dp import generate_result_monitor_warning, generate_result_zone_warning
+from dp import *
+from logger import logger
 from modelCalc import *
 
 
@@ -120,24 +121,23 @@ def QXJY_report(risk_zone_num):
 
     indicators = calc_QXJY_report_12_24h(df1, df2)
 
-    result_df = generate_result_zone_warning(risk_zone_num, indicators, df1.index[-1])
+    result_df = generate_result_zone_warning_report(risk_zone_num, indicators, df2.index[-1])
+    print(result_df)
     return result_df
 
 
-def switch_model(code):
+def switch_model(code, type=None):
     df = sourceCli.query_params(table='qz_warning_model_use_info',
                                 items=['model_code'],
                                 where={'obj_id': code})
     try:
-        model_code_ori = str(df['model_code'][0])
-        model_code = model_code_ori.split('_')
-        model_code = model_code[0]
+        model_code = str(df['model_code'][0])
         model_code = model_code.split('-')
         model_code = model_code[0]
-        if model_code_ori.find('forecast') != -1:
-            model_ = eval(model_code + '_forecast')
-        else:
-            model_ = eval(model_code)
+        if type == 'report':
+            model_code = model_code + '_report'
+        model_ = eval(model_code)
     except:
+        logger.exception(msg='')
         return None
     return model_

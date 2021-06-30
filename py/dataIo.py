@@ -91,7 +91,7 @@ def get_risk_zone_nums_updated():
     return risk_zone_nums
 
 
-def get_risk_zone_nums_updated_forecast():
+def get_risk_zone_nums_updated_report():
     table = 'qz_risk_zone_rain_report'
     old_id = get_latest_id(table)
     if old_id is None:
@@ -166,7 +166,8 @@ def get_data_qx_report(risk_zone_num):
                                 items=['reporttimes', 'value_00_12', 'value_12_24'],
                                 where={'county': "%" + district_name + "%"},
                                 order_by="reporttimes",
-                                limit=30,
+                                sort='DESC',
+                                limit=1,
                                 distinct=True)
 
     df.index = pd.DatetimeIndex(df['reporttimes'].tolist())

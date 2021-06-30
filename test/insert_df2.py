@@ -31,4 +31,4 @@ for t in time_list:
     dfi = dfi.reset_index(drop=True)
     print(dfi)
     resultCli.insert_df('qz_device_data', dfi)
-    time.sleep(5)
+    time.sleep(1)
