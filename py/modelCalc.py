@@ -66,5 +66,5 @@ def calc_QXJY_report_12_24h(df1, df2):
     QXJY_YB_12h = QXJY_PAST_12 + QXJY_00_12
     QXJY_YB_24h = QXJY_00_12 + QXJY_12_24
 
-    dic1 = {'QXJY_YB_12h': QXJY_YB_12h, 'QXJY_YB_24h': QXJY_YB_24h, }
+    dic1 = {'QXJY_YB_12h': QXJY_YB_12h, 'QXJY_YB_24h': QXJY_YB_24h}
     return dic1
