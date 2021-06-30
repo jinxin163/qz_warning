@@ -14,6 +14,7 @@ print(code_list)
 for code in code_list:
     dfi = df[df['hash_unique'] == code]
     dfi = dfi.reset_index(drop=True)
+    print(dfi['reporttimes'])
     print(dfi)
     resultCli.insert_df(table='qz_risk_zone_rain_report', df=dfi)
     time.sleep(5)

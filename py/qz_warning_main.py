@@ -6,6 +6,7 @@ from multiprocessing import Process
 
 def monitor_warning():
     print('monitor_warning', flush=True)
+    print(datetime.datetime.now())
     device_codes = []
     try:
         device_codes = get_device_codes_updated()
@@ -21,6 +22,7 @@ def monitor_warning():
 
 def risk_zone_warning():
     print('risk_zone_warning', flush=True)
+    print(datetime.datetime.now())
     risk_zone_nums = []
     try:
         risk_zone_nums = get_risk_zone_nums_updated()
@@ -36,6 +38,7 @@ def risk_zone_warning():
 
 def risk_zone_warning_report():
     print('risk_zone_warning_report', flush=True)
+    print(datetime.datetime.now())
     risk_zone_nums_report = []
     try:
         risk_zone_nums_report = get_risk_zone_nums_updated_report()
@@ -51,23 +54,14 @@ def risk_zone_warning_report():
 
 if __name__ == "__main__":
     while True:
-        monitor_warning()
-        risk_zone_warning()
-        risk_zone_warning_report()
-        time.sleep(30)
-
-        # process = [Process(target=monitor_warning(), args=()),
-        #            Process(target=risk_zone_warning(), args=()),
-        #            Process(target=risk_zone_warning_report(), args=())]
-        # [p.start() for p in process]  # 开启了3个进程
-        # [p.join() for p in process]  # 等待进程依次结束
+        # monitor_warning()
+        # risk_zone_warning()
+        # risk_zone_warning_report()
         # time.sleep(30)
 
-        # p1 = Process(target=monitor_warning(), args=())
-        # p2 = Process(target=risk_zone_warning(), args=())
-        # p3 = Process(target=risk_zone_warning_report(), args=())
-        #
-        # p1.start()
-        # p2.start()
-        # p3.start()
-        # time.sleep(30)
+        process = [Process(target=monitor_warning, args=()),  # 方法名不能带括号
+                   Process(target=risk_zone_warning, args=()),
+                   Process(target=risk_zone_warning_report, args=())]
+        [p.start() for p in process]  # 开启了3个进程
+        [p.join() for p in process]  # 等待进程依次结束
+        time.sleep(60)

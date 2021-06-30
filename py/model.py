@@ -122,7 +122,6 @@ def QXJY_report(risk_zone_num):
     indicators = calc_QXJY_report_12_24h(df1, df2)
 
     result_df = generate_result_zone_warning_report(risk_zone_num, indicators, df2.index[-1])
-    print(result_df)
     return result_df
 
 

@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import datetime
-import dp
+
 import pandas as pd
+
+import dp
 from config import redisCli, sourceCli
-from utils import deltaTime, switch_source_table
+from utils import deltaTime
 
 
 def save_latest_time(key, lt_dict):
@@ -149,6 +151,7 @@ def get_data_qx(risk_zone_num):
                                 items=['observtimes', 'value'],
                                 where={'county': "%" + district_name + "%"},
                                 order_by="observtimes",
+                                sort='DESC',
                                 limit=30,
                                 distinct=True)
     df.index = pd.DatetimeIndex(df['observtimes'].tolist())

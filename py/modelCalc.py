@@ -27,8 +27,7 @@ def calc_GNSS_S_past_time(df, time_range):
 
 def calc_sum_time_range(df, time_range):
     df = df.resample('1h').last().ffill()
-
-    start_time = df.index[-1] - deltaTime(time_range)
+    start_time = max(df.index) - deltaTime(time_range)
     df = df[df.index > start_time]
     df.columns = [f'{i}_{time_range}' for i in df.columns]
     dic = df.sum().to_dict()
@@ -55,7 +54,7 @@ def calc_QXJY_report_12_24h(df1, df2):
     df1 = df1.resample('1h').last().ffill()
 
     time_range = '12h'
-    start_time = df1.index[-1] - deltaTime(time_range)
+    start_time = max(df1.index) - deltaTime(time_range)
     df1 = df1[df1.index > start_time]
     df1.columns = [f'{i}_{time_range}' for i in df1.columns]
     dic = df1.sum().to_dict()
