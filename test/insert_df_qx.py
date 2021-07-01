@@ -24,5 +24,5 @@ for code in code_list:
     dfi = dfi.reset_index(drop=True)
     dfi = dfi.head(1)
     print(dfi)
-    resultCli.insert_df(table='qz_risk_zone_rain', df=dfi)
+    # resultCli.insert_df(table='qz_risk_zone_rain', df=dfi)
     time.sleep(5)

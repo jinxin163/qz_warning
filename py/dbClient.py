@@ -91,6 +91,7 @@ class mysqlClient:
             conn.close()
 
     def insert_df(self, table, df):
+        df = df.reset_index(drop=True)
         cols = list(df.columns)
         values = []
         for i in range(len(df)):
