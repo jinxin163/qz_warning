@@ -109,7 +109,7 @@ def QXJY(risk_zone_num):
     return result_df
 
 
-def QXJY_report(risk_zone_num):
+def QXJY_YB(risk_zone_num):
     df1 = get_data_qx(risk_zone_num)
     if df1.empty:
         print('df.empty')
@@ -125,16 +125,18 @@ def QXJY_report(risk_zone_num):
     return result_df
 
 
-def switch_model(code, type=None):
+def switch_model(code, modelType):
     df = sourceCli.query_params(table='qz_warning_model_use_info',
                                 items=['model_code'],
-                                where={'obj_id': code})
+                                where={'obj_id': code, 'model_type': modelType})
+    if df.empty:
+        return None
     try:
         model_code = str(df['model_code'][0])
         model_code = model_code.split('-')
         model_code = model_code[0]
-        if type == 'report':
-            model_code = model_code + '_report'
+        if modelType == 3:
+            model_code = model_code + '_YB'
         model_ = eval(model_code)
     except:
         logger.exception(msg='')
